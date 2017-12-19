@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.Parsing", "Lokad.Parsing\Lokad.Parsing.csproj", "{9C1922A9-B1B6-403A-9102-60F25274EA6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.Parsing.Test", "Lokad.Parsing.Test\Lokad.Parsing.Test.csproj", "{48EE07AC-60E5-45CB-82BB-B28567FC57D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C1922A9-B1B6-403A-9102-60F25274EA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1922A9-B1B6-403A-9102-60F25274EA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1922A9-B1B6-403A-9102-60F25274EA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1922A9-B1B6-403A-9102-60F25274EA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48EE07AC-60E5-45CB-82BB-B28567FC57D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48EE07AC-60E5-45CB-82BB-B28567FC57D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48EE07AC-60E5-45CB-82BB-B28567FC57D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48EE07AC-60E5-45CB-82BB-B28567FC57D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {283663FB-8F17-4804-8215-B179312069CD}
+	EndGlobalSection
+EndGlobal
