@@ -26,14 +26,14 @@ using Lokad.Parsing.Lexer;
 [Tokens]
 enum Token
 {
-	[EndOfStream] EoS,
-	[Error] Error,
-	
-	[Pattern("0|[1-9][0-9]*")] Number,
-	[Any("+")] Add,
-	[Any("-")] Sub,
-	[Any("*")] Mul,
-	[Any("/")] Div
+    [EndOfStream] EoS,
+    [Error] Error,
+    
+    [Pattern("0|[1-9][0-9]*")] Number,
+    [Any("+")] Add,
+    [Any("-")] Sub,
+    [Any("*")] Mul,
+    [Any("/")] Div
 }
 ```
 
@@ -100,11 +100,11 @@ You can mark a token as the child of another by applying the
 ```cs
     [PatternCi("[a-z][a-z0-9]*")] Identifier,
     
-	// Keywords
-	[From((int)Identifier), Any("if")] If,
-	[From((int)Identifier), Any("else")] Else,
-	[From((int)Identifier), Any("while")] While,
-	[From((int)Identifier), Any("for")] For,
+    // Keywords
+    [From((int)Identifier), Any("if")] If,
+    [From((int)Identifier), Any("else")] Else,
+    [From((int)Identifier), Any("while")] While,
+    [From((int)Identifier), Any("for")] For,
 ```
 
 The syntax is a bit clunky, because C# does not let you define an attribute with
@@ -125,11 +125,11 @@ This makes the enumeration code a bit more readable:
 ```cs
     [PatternCi("[a-z][a-z0-9]*")] Identifier,
     
-	// Keywords
-	[F(Identifier), Any("if")] If,
-	[F(Identifier), Any("else")] Else,
-	[F(Identifier), Any("while")] While,
-	[F(Identifier), Any("for")] For,
+    // Keywords
+    [F(Identifier), Any("if")] If,
+    [F(Identifier), Any("else")] Else,
+    [F(Identifier), Any("while")] While,
+    [F(Identifier), Any("for")] For,
 ```
 
 Against the input `"if(A)"`, the tokenizer would not attempt to match tokens 
@@ -307,9 +307,9 @@ class OAttribute : TerminalAttribute
 
 class LAttribute : ListAttribute
 {
-	LAttribute(int maxRank = -1) : base(maxRank) { }
-	Token Sep { set => Separator = (int)value; }
-	Token End { set => Terminator = (int)value; }
+    LAttribute(int maxRank = -1) : base(maxRank) { }
+    Token Sep { set => Separator = (int)value; }
+    Token End { set => Terminator = (int)value; }
 }
 ```
   
@@ -330,7 +330,7 @@ expr ::= term
 term ::= atom
        | term Mul atom
        | term Div atom
-	
+    
 atom ::= Number
        | Open expr Close
 ```
@@ -357,42 +357,42 @@ using Tk = Token;
 class Parser : GrammarParser<Parser, Token, Expr>
 {
     [Rule] // expr ::= term
-	public Expr OfTerm([NT] Term t) => new Expr { Value = t.Value };
-	
-	[Rule] // expr ::= expr (Add | Sub) term
-	public Expr Op(
-	    [NT]               Expr left,
-	    [T(Tk.Add,Tk.Sub)] Tk op,
-	    [NT]               Term right)
-	=> 
-	    new Expr { Value = op == Tk.Add 
-		    ? left.Value + right.Value 
-			: left.Value - right.Value };
-			
-	[Rule] // term ::= atom
-	public Term OfAtom([NT] Atom a) => new Term { Value = a.Value };
-	
-	[Rule] // term ::= term (Mul | Div) atom
-	public Term Op(	
-	    [NT]               Term left,
-	    [T(Tk.Mul,Tk.Div)] Tk op,
-	    [NT]               Atom right)
-	=>
-		new Term { Value = op == Tk.Mul 
-			? left.Value * right.Value
-			: left.Value / right.Value };
-			
-	[Rule] // atom ::= Number
-	public Atom Number([T(Tk.Number)] string num) => 
-		new Atom { Value = int.Parse(num) };
-		
-	[Rule] // atom ::= Open expr Close
-	public Atom Parens(
-		[T(Tk.Open)]  Tk a,
-		[NT]          Expr e,
-		[T(Tk.Close)] Tk b)
-	=>
-		new Atom { Value = e.Value };
+    public Expr OfTerm([NT] Term t) => new Expr { Value = t.Value };
+    
+    [Rule] // expr ::= expr (Add | Sub) term
+    public Expr Op(
+        [NT]               Expr left,
+        [T(Tk.Add,Tk.Sub)] Tk op,
+        [NT]               Term right)
+    => 
+        new Expr { Value = op == Tk.Add 
+            ? left.Value + right.Value 
+            : left.Value - right.Value };
+            
+    [Rule] // term ::= atom
+    public Term OfAtom([NT] Atom a) => new Term { Value = a.Value };
+    
+    [Rule] // term ::= term (Mul | Div) atom
+    public Term Op( 
+        [NT]               Term left,
+        [T(Tk.Mul,Tk.Div)] Tk op,
+        [NT]               Atom right)
+    =>
+        new Term { Value = op == Tk.Mul 
+            ? left.Value * right.Value
+            : left.Value / right.Value };
+            
+    [Rule] // atom ::= Number
+    public Atom Number([T(Tk.Number)] string num) => 
+        new Atom { Value = int.Parse(num) };
+        
+    [Rule] // atom ::= Open expr Close
+    public Atom Parens(
+        [T(Tk.Open)]  Tk a,
+        [NT]          Expr e,
+        [T(Tk.Close)] Tk b)
+    =>
+        new Atom { Value = e.Value };
 }
 ```
 
@@ -453,7 +453,7 @@ syntax for a
 ```
 fixed_parameter 
     : attributes? parameter_modifier? type identifier default_argument?
-	;
+    ;
 ``` 
 
 It is trivial to manually define a `attributes_opt` non-terminal that can be 
@@ -576,30 +576,30 @@ using Tk = Token;
 
 class Parser : GrammarParser<Parser, Token, double>
 {
-	[Rule(Rank=2)] // expr ::= (expr|term|atom) (Add | Sub) (term|atom)
-	public double Op(
-	    [NT(2)]            double left,
-	    [T(Tk.Add,Tk.Sub)] Tk op,
-	    [NT(1)]            double right)
-	=> 
-	    op == Tk.Add ? left + right : left - right;
-				
-	[Rule(Rank=1)] // term ::= (term|atom) (Mul | Div) atom
-	public Term Op(	
-	    [NT(1)]            double left,
-	    [T(Tk.Mul,Tk.Div)] Tk op,
-	    [NT(0)]            double right)
-	=>
-		op == Tk.Mul ? left * right : left / right;
-			
-	[Rule] // atom ::= Number
-	public Atom Number([T(Tk.Number)] string num) => double.Parse(num);
-		
-	[Rule] // atom ::= Open (expr|term|atom) Close
-	public Atom Parens(
-		[T(Tk.Open)]  Tk a,
-		[NT]          double e,
-		[T(Tk.Close)] Tk b)	=> e;
+    [Rule(Rank=2)] // expr ::= (expr|term|atom) (Add | Sub) (term|atom)
+    public double Op(
+        [NT(2)]            double left,
+        [T(Tk.Add,Tk.Sub)] Tk op,
+        [NT(1)]            double right)
+    => 
+        op == Tk.Add ? left + right : left - right;
+                
+    [Rule(Rank=1)] // term ::= (term|atom) (Mul | Div) atom
+    public Term Op( 
+        [NT(1)]            double left,
+        [T(Tk.Mul,Tk.Div)] Tk op,
+        [NT(0)]            double right)
+    =>
+        op == Tk.Mul ? left * right : left / right;
+            
+    [Rule] // atom ::= Number
+    public Atom Number([T(Tk.Number)] string num) => double.Parse(num);
+        
+    [Rule] // atom ::= Open (expr|term|atom) Close
+    public Atom Parens(
+        [T(Tk.Open)]  Tk a,
+        [NT]          double e,
+        [T(Tk.Close)] Tk b) => e;
 }
 ```
 
