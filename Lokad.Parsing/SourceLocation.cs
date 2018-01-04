@@ -29,7 +29,7 @@ namespace Lokad.Parsing
         [Pure]
         public SourceLocation ShiftColumn(int by)
         {
-            if (Column + by <= 1)
+            if (Column + by < 1)
                 throw new ArgumentException($"Invalid shift (column {Column}, shift {by})", nameof(by));
 
             return new SourceLocation(Position + by, Line, Column + by);

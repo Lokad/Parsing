@@ -52,6 +52,11 @@ namespace Lokad.Parsing.Test
             Assert.AreEqual(2, negative.Line);
             Assert.AreEqual(2, negative.Column);
 
+            var borderline = new SourceLocation(18, 2, 5).ShiftColumn(-4);
+            Assert.AreEqual(14, borderline.Position);
+            Assert.AreEqual(2, borderline.Line);
+            Assert.AreEqual(1, borderline.Column);
+            
             var zero = new SourceLocation(18, 2, 5).ShiftColumn(0);
             Assert.AreEqual(18, zero.Position);
             Assert.AreEqual(2, zero.Line);
