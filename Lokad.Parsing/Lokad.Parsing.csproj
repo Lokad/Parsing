@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net452;net462;netstandard2.0</TargetFrameworks>
     <AssemblyName>Lokad.Parsing</AssemblyName>
     <RuntimeIdentifiers>win</RuntimeIdentifiers> 
     <Company>Lokad</Company>
@@ -10,6 +10,12 @@
     <FileVersion>1.0.0.0</FileVersion>
     <PackageId>Lokad.Parsing</PackageId>
     <PackageVersion>1.0.0.0</PackageVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Lokad</Authors>
+    <Description>A performant, type-safe .NET library for building tokenizers and parsers. </Description>
+    <PackageLicenseUrl>https://github.com/Lokad/Parsing/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Lokad/Parsing</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Lokad/Parsing/master/lokad.png</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
