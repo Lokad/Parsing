@@ -15,6 +15,8 @@ and
 The Lokad.Parsing API is designed to be used from C#, and relies heavily on 
 reflection and annotations. A different API for F# is in the works.
 
+NuGet package: [Lokad.Parsing](https://www.nuget.org/packages/Lokad.Parsing/1.0.1)
+
 ## Lexer features
 
 Tokens are represented by an `enum`, and the lexer is built from annotations
