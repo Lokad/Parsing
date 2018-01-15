@@ -4,12 +4,12 @@
     <AssemblyName>Lokad.Parsing</AssemblyName>
     <RuntimeIdentifiers>win</RuntimeIdentifiers> 
     <Company>Lokad</Company>
-    <Copyright>Copyright © Lokad 2017</Copyright>
+    <Copyright>Copyright © Lokad 2018</Copyright>
     
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
     <PackageId>Lokad.Parsing</PackageId>
-    <PackageVersion>1.0.1.0</PackageVersion>
+    <PackageVersion>1.1.0.0</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Lokad</Authors>
     <Description>A performant, type-safe .NET library for building tokenizers and parsers. </Description>

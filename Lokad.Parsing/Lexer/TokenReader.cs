@@ -46,12 +46,16 @@ namespace Lokad.Parsing.Lexer
             return c == ' ' || c == '\t' || c == '\r';
         }
 
+        public LexerResult<TTok> ReadAllTokens(string buffer, bool isInputTruncated = false) =>
+            ReadAllTokensUpTo(buffer, buffer.Length, isInputTruncated);
+
         /// <summary> Reads all tokens in the buffer. </summary>
         /// <param name="buffer">Code to tokenize</param>
+        /// <param name="upto">Maximum position to start a new token</param>
         /// <param name="isInputTruncated">
         /// If true, don't insert end of line and dedent and EoS token at the end of stream
         /// </param>
-        public LexerResult<TTok> ReadAllTokens(string buffer, bool isInputTruncated = false)
+        public LexerResult<TTok> ReadAllTokensUpTo(string buffer, int upto, bool isInputTruncated = false)
         {
             _indents?.Clear();
             _indents?.Push(0);
@@ -72,8 +76,9 @@ namespace Lokad.Parsing.Lexer
             // Skip backwards from end until we reach an interesting character.
             while (bufLength > 0 && IsSkippable(buffer[bufLength - 1])) --bufLength;
 
+            var maxPos = Math.Min(bufLength, upto);
             var start = 0;
-            while (start < bufLength)
+            while (start < maxPos)
             {
                 var first = buffer[start];
                 

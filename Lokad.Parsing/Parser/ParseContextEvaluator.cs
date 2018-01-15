@@ -158,8 +158,12 @@ namespace Lokad.Parsing.Parser
         /// Contextual parse of tokens upto a given position.
         /// </summary>
         /// <param name="tokens">Result of parsing.</param>
-        /// <param name="upto">Position to not go above for any parsed token</param>
-        public ContextResult Compute(LexerResult<TTok> tokens, SourceSpan upto)
+        /// <param name="ignoreLastToken">If true, we don't consume the last token.</param>
+        /// <remarks>
+        /// Not using the last token can be useful for further usage, if we need the content
+        /// of the token, but we are more interested in the parsing context above it.
+        /// </remarks>
+        public ContextResult Compute(LexerResult<TTok> tokens, bool ignoreLastToken)
         {
             var contextStack = new Stack<int>();
 
@@ -167,6 +171,7 @@ namespace Lokad.Parsing.Parser
             var readIndex = 0;
             var token = tokens.Tokens[0];
             var currentState = _initialState;
+            var maxToken = Math.Max(0, tokens.Count + (ignoreLastToken ? -1 : 0));
 
             while (true)
             {
@@ -177,13 +182,10 @@ namespace Lokad.Parsing.Parser
                     contextStack.Push(currentState);
                     currentState = action;
 
-                    if (readIndex + 1 >= tokens.Count)
+                    if (readIndex + 1 >= maxToken)
                         break;
 
                     token = tokens.Tokens[++readIndex];
-
-                    if (token.Start + token.Length > upto.Location.Position)
-                        break;
                 }
                 else if (IsReduceAction(action))
                 {
