@@ -2,7 +2,7 @@
 
 **A type-safe .NET library for building tokenizers and parsers.** You can use Lokad.Parsing both for quick DSL prototypes and to implement robust, production-grade compilers. At Lokad, we have been using Lokad.Parsing to implement [Envision](https://docs.lokad.com), our in-house programming language, from 2015 to 2019 (we have upgraded to an F# parser since then).
 
-You can see Lokad.Parsing in action in open source project Lokad.BrainScript, which parses the CNTK BrainScript language: [lexer](tree/master/Lokad.Parsing/samples/Lokad.BrainScript/Token.cs) and [parser](tree/master/Lokad.Parsing/samples/Lokad.BrainScript/Parser.cs).
+You can see Lokad.Parsing in action in open source project Lokad.BrainScript, which parses the CNTK BrainScript language: [lexer](Lokad.Parsing/samples/Lokad.BrainScript/Token.cs) and [parser](Lokad.Parsing/samples/Lokad.BrainScript/Parser.cs).
 
 The Lokad.Parsing API is designed to be used from C#, and relies heavily on reflection and annotations. A different API for F# is in the works.
 
@@ -34,25 +34,19 @@ The tokenizer runs through the input string, matching against the patterns assoc
 
 To specify how each token matches the input text, attributes are used:
 
- - [`Pattern`](Lokad.Parsing/Lexer/PatternAttribute.cs) (and `PatternCi` for 
-   case-insensitive matching) recognize tokens with regular expressions, using 
-   the standard .NET 
-   [`Regex`](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions) 
-   syntax. 
+ - [`Pattern`](Lokad.Parsing/Lexer/PatternAttribute.cs) (and `PatternCi` for case-insensitive matching) recognize tokens with regular expressions, using the standard .NET [`Regex`](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions)  syntax.
  
    ```cs
        [Pattern("[a-zA-Z][a-zA-Z0-9]*")] Identifier,
    ```
    
- - [`Any`](Lokad.Parsing/Lexer/AnyAttribute.cs) (and `AnyCi` for case-insensitive
-   matching) recognize tokens using a finite list of strings:
+ - [`Any`](Lokad.Parsing/Lexer/AnyAttribute.cs) (and `AnyCi` for case-insensitive matching) recognize tokens using a finite list of strings:
  
    ```cs
        [Any("if", "then", "else")] Keyword,
    ```
       
- - `Ci` is a special case of `AnyCi` which uses the enumeration member's name as
-   the string to recognize. The two following lines are equivalent:
+ - `Ci` is a special case of `AnyCi` which uses the enumeration member's name as the string to recognize. The two following lines are equivalent:
 
    ```cs
        [AnyCi("if")] If,
@@ -62,13 +56,11 @@ To specify how each token matches the input text, attributes are used:
    
 You should also define two mandatory special tokens:
  
- - The end-of-stream _special_ token `[EndOfStream]` is a zero-length token 
-   emitted at the very end of the input text. It is always the last token.
+ - The end-of-stream _special_ token `[EndOfStream]` is a zero-length token emitted at the very end of the input text. It is always the last token.
  
- - The error token `[Error]` is a single-character token emitted when no other 
-   token matches the next character. It is not a special token, merely a "default"
+ - The error token `[Error]` is a single-character token emitted when no other token matches the next character. It is not a special token, merely a "default"
    case.
-   
+
 White-space (`[ \n\t\r]+`) is ignored by the tokenizer before and after tokens, but may still be recognized as part of tokens.
 
 ### Advanced feature : child tokens
