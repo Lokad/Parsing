@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1</TargetFrameworks>
+		<AssemblyName>Lokad.BrainScript</AssemblyName>
+		<RuntimeIdentifiers>win</RuntimeIdentifiers>
+		<OutputType>Library</OutputType>
+		<Company>Lokad</Company>
+		<Copyright>Copyright © Lokad 2023</Copyright>
+		<Description>BrainScript grammar with Lokad.Parsing</Description>
+
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Lokad.Parsing" Version="1.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+</Project>
