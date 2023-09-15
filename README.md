@@ -2,7 +2,7 @@
 
 **A type-safe .NET library for building tokenizers and parsers.** You can use Lokad.Parsing both for quick DSL prototypes and to implement robust, production-grade compilers. At Lokad, we have been using Lokad.Parsing to implement [Envision](https://docs.lokad.com), our in-house programming language, from 2015 to 2019 (we have upgraded to an F# parser since then).
 
-You can see Lokad.Parsing in action in open source project Lokad.BrainScript, which parses the CNTK BrainScript language: [lexer](Lokad.Parsing/samples/Lokad.BrainScript/Token.cs) and [parser](Lokad.Parsing/samples/Lokad.BrainScript/Parser.cs).
+You can see Lokad.Parsing in action in open source project Lokad.BrainScript, which parses the CNTK BrainScript language: [lexer](samples/Lokad.BrainScript/Token.cs) and [parser](samples/Lokad.BrainScript/Parser.cs).
 
 The Lokad.Parsing API is designed to be used from C#, and relies heavily on reflection and annotations. A different API for F# is in the works.
 
